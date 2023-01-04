@@ -35,7 +35,7 @@ def get_parser():
     
     parser.add_argument('-c', '--config', 
                         default='./knockd.conf',
-                        help='use an alternate config file',
+                        help='use an alternate config file (default ./knockd.conf)',
                         type=str)
     parser.add_argument('-d', '--debug', 
                         action='store_true',

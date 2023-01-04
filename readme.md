@@ -1,7 +1,5 @@
 # windows-knock
 
-# windows-knock
-
 It’s a simply port knocking server for windows which is implemented by python and [pydivert](https://github.com/ffalcinelli/pydivert). This project is based on https://github.com/jvinet/knock and rewritten from C to python to let it fit the windows environment.
 
 ### Install dependencies
@@ -40,7 +38,7 @@ Windows Port-knocking Server
 optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
-                        use an alternate config file
+                        use an alternate config file (default ./knockd.conf)
   -d, --debug           debug mode
   -i [INTERFACE [INTERFACE ...]], --interface [INTERFACE [INTERFACE ...]]
                         index of network interface to liston on (default all)
