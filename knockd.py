@@ -2,6 +2,7 @@ import pydivert
 import argparse
 import subprocess
 import os
+import sys
 import time
 import re
 import copy
@@ -74,7 +75,7 @@ def get_interface():
         for i in interface_list:
             print(i)
         print(f'=================================\n')
-        exit()
+        sys.exit()
     
     # selected interface
     if args.interface:
@@ -84,7 +85,7 @@ def get_interface():
                 if i == j.index:
                     break
             else:    
-                exit("[Error] Selected interface not existied!")
+                sys.exit("[Error] Selected interface not existied!")
     else:
         for i in interface_list:
             selected_interface.append(i.index)
@@ -95,7 +96,7 @@ def read_config():
     try:
         config_file = open(args.config, 'r')
     except:
-        exit("[Error] Wrong config file location!")
+        sys.exit("[Error] Wrong config file location!")
     name = ''
     for line in config_file.readlines():
         line = line.strip()
