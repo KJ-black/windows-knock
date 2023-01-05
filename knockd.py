@@ -129,8 +129,10 @@ def read_config():
         print(f'All used port: {all_port}\n')
     return config           
 
-def match_exec(q):
+def match_exec(q, packet):
     if not q.sequence:
+        if re.search('\%[a-zA-Z0-9]+\%', q.command):
+            q.command = re.sub(r'\%[a-zA-Z0-9]+\%', packet.src_addr, q.command)
         os.system(q.command)
         if args.debug: print(f"[+] Execute: {q.command}")
         return True
@@ -140,7 +142,7 @@ def match_first(start, protocol, packet):
     for key, rule in config.items():
         if packet.dst_port == rule['sequence'][0] and protocol == rule['protocol']:
             tmp = candidate(key, start, start+int(rule['seq_timeout']), rule['sequence'][1:], rule['command'], rule['protocol'])
-            if not match_exec(tmp):
+            if not match_exec(tmp, packet):
                 match_queue.append(tmp)
         
 def match_seq(start, protocol, packet):
@@ -152,7 +154,7 @@ def match_seq(start, protocol, packet):
             continue
         if q.sequence[0] == packet.dst_port and protocol == q.protocol:
             q.sequence = q.sequence[1:]
-            if match_exec(q):
+            if match_exec(q, packet):
                 remove_list.append(q)
     
     for q in remove_list:
