@@ -15,7 +15,7 @@ class config_entry:
     sequence: list
     seq_timeout: int
     command: str
-    tcpflags: str
+    protocol: str
 
 @dataclass
 class candidate:
@@ -25,6 +25,7 @@ class candidate:
     sequence: list
     command: str
     protocol: str
+    src_addr: str
 
 @dataclass
 class interface:
@@ -141,7 +142,7 @@ def match_exec(q, packet):
 def match_first(start, protocol, packet):
     for key, rule in config.items():
         if packet.dst_port == rule['sequence'][0] and protocol == rule['protocol']:
-            tmp = candidate(key, start, start+int(rule['seq_timeout']), rule['sequence'][1:], rule['command'], rule['protocol'])
+            tmp = candidate(key, start, start+int(rule['seq_timeout']), rule['sequence'][1:], rule['command'], rule['protocol'], packet.src_addr)
             if not match_exec(tmp, packet):
                 match_queue.append(tmp)
         
@@ -152,7 +153,7 @@ def match_seq(start, protocol, packet):
         if q.end < start: 
             remove_list.append(q)
             continue
-        if q.sequence[0] == packet.dst_port and protocol == q.protocol:
+        if q.sequence[0] == packet.dst_port and packet.src_addr == q.src_addr and protocol == q.protocol:
             q.sequence = q.sequence[1:]
             if match_exec(q, packet):
                 remove_list.append(q)
