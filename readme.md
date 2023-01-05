@@ -2,6 +2,14 @@
 
 It’s a simple port knocking server for windows which is implemented by python and [pydivert](https://github.com/ffalcinelli/pydivert). This project is based on [jvinet/knock](https://github.com/jvinet/knock) and rewritten to let it fit the windows environment.
 
+Details about the port-knocking mechanism can refer to my [article](https://www.notion.so/Port-Knocking-acf3e7bd78bf46268cda1977214ef8e0).
+
+### Environment
+
+- Windows 10 Professional 10.0.19044
+- Python version 3.7
+- Needs to be executed with Administrator privilege
+
 ### Install dependencies
 
 ```
