@@ -56,11 +56,16 @@ There are lots of ready-made port-knocking clients.
         
         E.g., `sudo nmap -sF -r 140.113.194.76 -p4000-4002`
         
-        <aside>
-        <img src="/icons/reference_gray.svg" alt="/icons/reference_gray.svg" width="40px" /> Nmap randomizes the port scan order by default to make detection slightly harder. The `-r` option causes them to be scanned in numerical order instead.
-        
-        </aside>
+        ※ Nmap randomizes the port scan order by default to make detection slightly harder. The `-r` option causes them to be scanned in numerical order instead.
         
 - Windows
     - [grongor/knock](https://github.com/grongor/knock) is a python written client which can use both in linux and windows and it can set the timeout parameter.
     - [Windows port knock application with gregsowell](https://gregsowell.com/?p=2020) is a well-compiled executable file with a GUI interface. It’s friendly for windows users.
+
+## TODO
+
+- [ ]  different protocol and difference flag. Now only tcp and udp takes effect.
+- [ ]  timeout mechanism to close the firewall
+- [ ]  cryptographic hashes to defends against packet sniffing and replay attacks.
+- [ ]  dynamic length and pool of length to increase its security
+- [ ]  dynamic attack response
